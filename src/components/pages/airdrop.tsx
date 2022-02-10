@@ -23,7 +23,7 @@ function Airdrop() {
     if (user) {
       user.set('airdropStatus', 'askedFor')
       user.set('notificationEmail', email)
-      user.set('mallorcaClub', mallorcaClub)
+      user.set('hackRabbit', true)
       user.save().then(user => {
         refetchUserData()
         console.log(user)
@@ -37,7 +37,7 @@ function Airdrop() {
     return (
       <div>
         <Row>
-          <Col span={10} xs={24}>
+          <Col span={5} xs={24}>
             <Form {...layout} style={{marginTop: "2rem"}}>
               <Form.Item name="email"
                  rules={[
@@ -50,16 +50,9 @@ function Airdrop() {
               >
                 <Input placeholder="Email (to receive airdrop notification)" value={email} onChange={(event: any) => setEmail(event.currentTarget.value)}/>
               </Form.Item>
-              <Form.Item name="mallorcaClub"
-              >
-                <Checkbox onChange={() => setMallorcaClub(!mallorcaClub)} checked={mallorcaClub}>
-                  I am a member of the Prestigious Mallorca Club
-                </Checkbox>
-                {/*<Checkbox onChange={(event: any) => setEmail(event.currentTarget.value)}/>*/}
-              </Form.Item>
               <Form.Item name="mallorcaClub">
                 <Button type={"primary"} onClick={handleGiveMe} disabled={!email}>
-                  Give me {mallorcaClub ? 1000 : 10} tokens
+                  Give me NFT rabbit
                 </Button>
               </Form.Item>
             </Form>
@@ -74,8 +67,8 @@ function Airdrop() {
           <Col span={24}>
           <Result
             status="success"
-            title="Successfully applied for J4IT!!!"
-            subTitle="You will receive an email notification once tokens are transferred to your wallet"
+            title="Successfully applied for HackRabbit NFT!!!"
+            subTitle="You will receive an email notification once NFT is transferred to your wallet"
           />
           </Col>
         </Row>

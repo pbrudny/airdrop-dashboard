@@ -23,14 +23,14 @@ export const Auth = () => {
       <Row gutter={[40, 0]}>
         <Col span={24}>
           <Title style={{textAlign: 'center'}} level={2}>
-            Want some free J4IT tokens?
+            Want some free HackRabbit NFTs?
           </Title>
         </Col>
       </Row>
       <Row>
         <Col span={24}>
           <div style={{textAlign: 'center'}}>
-            <img src={'https://media.giphy.com/media/l0HFkA6omUyjVYqw8/giphy.gif'}/>
+            <img src={'https://media.giphy.com/media/ZtcfojuInM5pINYAEh/giphy.gif'}/>
           </div>
         </Col>
       </Row>
