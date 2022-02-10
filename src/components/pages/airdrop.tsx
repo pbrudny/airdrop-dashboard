@@ -23,6 +23,7 @@ function Airdrop() {
     if (user) {
       user.set('airdropStatus', 'askedFor')
       user.set('notificationEmail', email)
+      user.set('mallorcaClub', false)
       user.set('hackRabbit', true)
       user.save().then(user => {
         refetchUserData()
