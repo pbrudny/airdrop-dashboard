@@ -4,6 +4,7 @@ import Tokens from "../components/pages/tokens";
 import Nfts from "../components/pages/nfts";
 import NftLazyMinter from "../components/pages/nftLazyMinter";
 import Users from "../components/pages/users";
+import ManageNfts from "../components/pages/manageNfts";
 import Airdrop from "../components/pages/airdrop";
 import SideNav from "../components/layouts/sidebar";
 
@@ -43,6 +44,7 @@ const ApplicationRoutes = () => {
               <Route path="/mint-nft" component={NftLazyMinter}/>
               <Route path="/airdrop" component={Airdrop}/>
               <Route path="/users" component={Users}/>
+              <Route path="/manage-nfts" component={ManageNfts}/>
               <Redirect to="/airdrop" from="/"/>
             </Switch>
           </Content>

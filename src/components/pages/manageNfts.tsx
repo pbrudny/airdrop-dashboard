@@ -5,13 +5,20 @@ import {useMoralis } from "react-moralis";
 
 const {Title} = Typography;
 
-const Users = () => {
+const ManageNfts = () => {
   const { Moralis } = useMoralis();
   const history = useHistory();
   const [allData, setAllData] = useState([]);
   // const User = Moralis.Object.extend("User");
 
+  // @ts-ignore
+  Moralis.enableWeb3();
+
+  const CONTRACT_ADDRESS = '0x1155bff43e0eb873651d851bc46a22d9cff9b385';
+  let web3;
+
   useEffect(() => {
+
     Moralis.Cloud.run("loadUsers").then((data: any) => {
       console.log(data)
       setAllData(data.results)
@@ -43,9 +50,48 @@ const Users = () => {
       title: 'Status',
       dataIndex: 'status'
     },
+    {
+      title: 'Transfer NFT',
+      key: 'transfer',
+      dataIndex: 'transfer',
+      render: (text: any, record: any) => (
+        <button onClick={(evt: any)=> transfer(record.email, record.accounts.toString())}>
+          Transfer
+        </button>
+      ),
+    },
   ];
 
   const data = [{}];
+
+  function getRandomInt(max: Number) {
+    // @ts-ignore
+    return Math.floor(Math.random() * max);
+  }
+
+  async function transfer(userEmail: string, receiverAddress: String) {
+    let rabbitId = getRandomInt(8)+1;
+    let amount = 1;
+
+    const options = {
+      type: "erc1155",
+      receiver: receiverAddress,
+      contractAddress: CONTRACT_ADDRESS,
+      tokenId: rabbitId,
+      amount: 1
+    }
+
+    // @ts-ignore
+    let result = await Moralis.transfer(options)
+    // number of owners should increase
+    console.log(result);
+    console.log(result.transactionHash);
+    Moralis.Cloud.run("notifyReceiver", {txHash: result.transactionHash, receiverAddress, rabbitId, userEmail }).then((err)=> {
+      console.log('notification sent!', err)
+      alert("Successfully transferred! CryptoRabbit: " + rabbitId );
+    });
+
+  }
 
   allData.map((user: any) => {
     const { createdAt, updatedAt, hackRabbit, ethAddress, notificationEmail, status, accounts } = user.attributes;
@@ -81,4 +127,4 @@ const Users = () => {
   );
 }
 
-export default Users;
+export default ManageNfts;
